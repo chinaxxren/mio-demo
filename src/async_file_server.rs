@@ -4,10 +4,23 @@ use std::fs::File;
 use std::io::{self, Read};
 use std::os::unix::io::AsRawFd;
 use mio::unix::SourceFd;
+use std::env;
 
 const FILE: Token = Token(0);
 
 fn main() -> io::Result<()> {
+    let args: Vec<String> = env::args().collect();
+    if args.len() < 2 {
+        eprintln!("Usage: {} <file_path>", args[0]);
+        return Err(io::Error::new(io::ErrorKind::InvalidInput, "No file path provided"));
+    }
+
+    let file_path = &args[1];
+    let mut file = File::open(file_path)?;
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)?;
+    println!("File contents:\n{}", contents);
+
     let mut poll = Poll::new()?;
     let mut events = Events::with_capacity(1024);
 
