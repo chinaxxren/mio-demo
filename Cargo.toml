@@ -1,0 +1,31 @@
+[package]
+name = "mio-demo"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+mio = { version = "1.0.2", features = ["net", "os-ext", "os-poll"] }
+
+[[bin]]
+name = "tcp_server"
+path = "src/tcp_server.rs"
+
+[[bin]]
+name = "udp_server"
+path = "src/udp_server.rs"
+
+[[bin]]
+name = "timeout_server"
+path = "src/timeout_server.rs"
+
+[[bin]]
+name = "async_file_server"
+path = "src/async_file_server.rs"
+
+[[bin]]
+name = "custom_event_server"
+path = "src/custom_event_server.rs"
+
+[[bin]]
+name = "all_server"
+path = "src/all_server.rs"

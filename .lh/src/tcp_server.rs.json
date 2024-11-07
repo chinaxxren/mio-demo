@@ -1,0 +1,90 @@
+{
+    "sourceFile": "src/tcp_server.rs",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 18,
+            "patches": [
+                {
+                    "date": 1730966977763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1730967182052,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n use std::io::{self, Read, Write};\n \n use mio::*;\n use mio::net::TcpListener;\n-\n+mio::Poll\n const SERVER: Token = Token(0);\n \n fn main() -> io::Result<()> {\n     let mut poll = Poll::new()?;\n"
+                },
+                {
+                    "date": 1730967285657,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,10 @@\n use std::io::{self, Read, Write};\n \n use mio::*;\n+use\n use mio::net::TcpListener;\n-mio::Poll\n+\n const SERVER: Token = Token(0);\n \n fn main() -> io::Result<()> {\n     let mut poll = Poll::new()?;\n"
+                },
+                {
+                    "date": 1730967297066,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,6 @@\n use std::io::{self, Read, Write};\n \n-use mio::*;\n-use\n-use mio::net::TcpListener;\n-\n const SERVER: Token = Token(0);\n \n fn main() -> io::Result<()> {\n     let mut poll = Poll::new()?;\n"
+                },
+                {
+                    "date": 1730967306818,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n use std::io::{self, Read, Write};\n \n+use mio::Poll;\n+\n const SERVER: Token = Token(0);\n \n fn main() -> io::Result<()> {\n     let mut poll = Poll::new()?;\n"
+                },
+                {
+                    "date": 1730967314756,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n use std::io::{self, Read, Write};\n \n-use mio::Poll;\n+use mio::{Poll, Token};\n \n const SERVER: Token = Token(0);\n \n fn main() -> io::Result<()> {\n"
+                },
+                {
+                    "date": 1730967325703,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n use std::io::{self, Read, Write};\n \n-use mio::{Poll, Token};\n+use mio::{Events, Poll, Token};\n \n const SERVER: Token = Token(0);\n \n fn main() -> io::Result<()> {\n"
+                },
+                {
+                    "date": 1730967332965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-use std::io::{self, Read, Write};\n+use std::{io::{self, Read, Write}, net::TcpListener};\n \n use mio::{Events, Poll, Token};\n \n const SERVER: Token = Token(0);\n"
+                },
+                {
+                    "date": 1730967339940,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n use std::{io::{self, Read, Write}, net::TcpListener};\n \n-use mio::{Events, Poll, Token};\n+use mio::{Events, Interest, Poll, Token};\n \n const SERVER: Token = Token(0);\n \n fn main() -> io::Result<()> {\n"
+                },
+                {
+                    "date": 1730967350603,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const SERVER: Token = Token(0);\n \n fn main() -> io::Result<()> {\n-    let mut poll = Poll::new()?;\n+    let mut poll = Poll?;\n     let mut events = Events::with_capacity(1024);\n \n     let addr = \"127.0.0.1:8000\".parse().unwrap();\n     let mut server = TcpListener::bind(addr)?;\n"
+                },
+                {
+                    "date": 1730967363620,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const SERVER: Token = Token(0);\n \n fn main() -> io::Result<()> {\n-    let mut poll = Poll?;\n+    let mut poll = Poll::new()?;\n     let mut events = Events::with_capacity(1024);\n \n     let addr = \"127.0.0.1:8000\".parse().unwrap();\n     let mut server = TcpListener::bind(addr)?;\n"
+                },
+                {
+                    "date": 1730967372562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const SERVER: Token = Token(0);\n \n fn main() -> io::Result<()> {\n-    let mut poll = Poll::new()?;\n+    let mut poll = Poll::poll()?;\n     let mut events = Events::with_capacity(1024);\n \n     let addr = \"127.0.0.1:8000\".parse().unwrap();\n     let mut server = TcpListener::bind(addr)?;\n"
+                },
+                {
+                    "date": 1730967403283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const SERVER: Token = Token(0);\n \n fn main() -> io::Result<()> {\n-    let mut poll = Poll::poll()?;\n+    let mut poll = Poll::new()?;\n     let mut events = Events::with_capacity(1024);\n \n     let addr = \"127.0.0.1:8000\".parse().unwrap();\n     let mut server = TcpListener::bind(addr)?;\n"
+                },
+                {
+                    "date": 1730967477890,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-use std::{io::{self, Read, Write}, net::TcpListener};\n+use std::{io::{self, Read, Write}};\n \n use mio::{Events, Interest, Poll, Token};\n \n const SERVER: Token = Token(0);\n"
+                },
+                {
+                    "date": 1730967484883,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n use std::{io::{self, Read, Write}};\n \n+use mio::net::{TcpListener, TcpStream};\n use mio::{Events, Interest, Poll, Token};\n \n const SERVER: Token = Token(0);\n \n"
+                },
+                {
+                    "date": 1730967774043,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n \n                     connections.push(connection);\n                 }\n                 token => {\n-                    let mut connection = &mut connections[token.0 - 1];\n+                    let  connection = &mut connections[token.0 - 1];\n                     let mut buffer = [0; 1024];\n \n                     match connection.read(&mut buffer) {\n                         Ok(n) if n > 0 => {\n"
+                },
+                {
+                    "date": 1730967784010,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n-use std::{io::{self, Read, Write}};\n+use std::io::{self, Read, Write};\n \n-use mio::net::{TcpListener, TcpStream};\n+use mio::net::{TcpListener};\n use mio::{Events, Interest, Poll, Token};\n \n const SERVER: Token = Token(0);\n \n@@ -11,13 +11,10 @@\n \n     let addr = \"127.0.0.1:8000\".parse().unwrap();\n     let mut server = TcpListener::bind(addr)?;\n \n-    poll.registry().register(\n-        &mut server,\n-        SERVER,\n-        Interest::READABLE,\n-    )?;\n+    poll.registry()\n+        .register(&mut server, SERVER, Interest::READABLE)?;\n \n     let mut connections = Vec::new();\n \n     loop {\n@@ -28,18 +25,15 @@\n                 SERVER => {\n                     let (mut connection, _) = server.accept()?;\n                     let token = Token(connections.len() + 1);\n \n-                    poll.registry().register(\n-                        &mut connection,\n-                        token,\n-                        Interest::READABLE,\n-                    )?;\n+                    poll.registry()\n+                        .register(&mut connection, token, Interest::READABLE)?;\n \n                     connections.push(connection);\n                 }\n                 token => {\n-                    let  connection = &mut connections[token.0 - 1];\n+                    let connection = &mut connections[token.0 - 1];\n                     let mut buffer = [0; 1024];\n \n                     match connection.read(&mut buffer) {\n                         Ok(n) if n > 0 => {\n@@ -52,5 +46,5 @@\n                 }\n             }\n         }\n     }\n-}\n\\ No newline at end of file\n+}\n"
+                },
+                {
+                    "date": 1730967791088,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n use std::io::{self, Read, Write};\n \n-use mio::net::{TcpListener};\n+use mio::net::TcpListener;\n use mio::{Events, Interest, Poll, Token};\n \n const SERVER: Token = Token(0);\n \n"
+                },
+                {
+                    "date": 1730967856808,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,41 +5,63 @@\n \n const SERVER: Token = Token(0);\n \n fn main() -> io::Result<()> {\n+    // 创建一个新的 Poll 实例\n     let mut poll = Poll::new()?;\n+    // 创建一个 Events 实例，用于存储发生的事件\n     let mut events = Events::with_capacity(1024);\n \n+    // 解析服务器地址\n     let addr = \"127.0.0.1:8000\".parse().unwrap();\n+    // 绑定 TCP 监听器到指定地址\n     let mut server = TcpListener::bind(addr)?;\n \n+    // 在 Poll 注册表中注册服务器，监听可读事件\n     poll.registry()\n-        .register(&mut server, SERVER, Interest::READABLE)?;\n+       .register(&mut server, SERVER, Interest::READABLE)?;\n \n+    // 创建一个空的 Vec 来存储连接\n     let mut connections = Vec::new();\n \n+    // 主循环，持续处理事件\n     loop {\n+        // 等待事件发生\n         poll.poll(&mut events, None)?;\n \n+        // 遍历所有发生的事件\n         for event in events.iter() {\n+            // 根据事件的 Token 来处理不同的逻辑\n             match event.token() {\n+                // 如果是服务器的 Token，表示有新的连接请求\n                 SERVER => {\n+                    // 接受新的连接\n                     let (mut connection, _) = server.accept()?;\n+                    // 为新连接分配一个 Token\n                     let token = Token(connections.len() + 1);\n \n+                    // 在 Poll 注册表中注册新连接，监听可读事件\n                     poll.registry()\n-                        .register(&mut connection, token, Interest::READABLE)?;\n+                       .register(&mut connection, token, Interest::READABLE)?;\n \n+                    // 将新连接添加到 connections Vec 中\n                     connections.push(connection);\n                 }\n+                // 如果是其他 Token，表示对应的连接有数据可读\n                 token => {\n+                    // 从 connections Vec 中获取对应的连接\n                     let connection = &mut connections[token.0 - 1];\n+                    // 创建一个 1024 字节的缓冲区\n                     let mut buffer = [0; 1024];\n \n+                    // 尝试从连接中读取数据到缓冲区\n                     match connection.read(&mut buffer) {\n+                        // 如果读取成功且读取到的数据长度大于 0\n                         Ok(n) if n > 0 => {\n+                            // 将缓冲区中的数据全部写回到连接中\n                             connection.write_all(&buffer[..n])?;\n                         }\n+                        // 如果读取失败或读取到的数据长度为 0，表示连接关闭或发生错误\n                         _ => {\n                             // 连接关闭或错误处理\n                         }\n                     }\n@@ -47,4 +69,5 @@\n             }\n         }\n     }\n }\n+\n"
+                }
+            ],
+            "date": 1730966977763,
+            "name": "Commit-0",
+            "content": "use std::io::{self, Read, Write};\n\nuse mio::*;\nuse mio::net::TcpListener;\n\nconst SERVER: Token = Token(0);\n\nfn main() -> io::Result<()> {\n    let mut poll = Poll::new()?;\n    let mut events = Events::with_capacity(1024);\n\n    let addr = \"127.0.0.1:8000\".parse().unwrap();\n    let mut server = TcpListener::bind(addr)?;\n\n    poll.registry().register(\n        &mut server,\n        SERVER,\n        Interest::READABLE,\n    )?;\n\n    let mut connections = Vec::new();\n\n    loop {\n        poll.poll(&mut events, None)?;\n\n        for event in events.iter() {\n            match event.token() {\n                SERVER => {\n                    let (mut connection, _) = server.accept()?;\n                    let token = Token(connections.len() + 1);\n\n                    poll.registry().register(\n                        &mut connection,\n                        token,\n                        Interest::READABLE,\n                    )?;\n\n                    connections.push(connection);\n                }\n                token => {\n                    let mut connection = &mut connections[token.0 - 1];\n                    let mut buffer = [0; 1024];\n\n                    match connection.read(&mut buffer) {\n                        Ok(n) if n > 0 => {\n                            connection.write_all(&buffer[..n])?;\n                        }\n                        _ => {\n                            // 连接关闭或错误处理\n                        }\n                    }\n                }\n            }\n        }\n    }\n}"
+        }
+    ]
+}

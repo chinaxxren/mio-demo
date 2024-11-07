@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/all_server.rs",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1730968697800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1730968697800,
+            "name": "Commit-0",
+            "content": "use mio::*;\nuse mio::net::{TcpListener, TcpStream};\nuse std::collections::HashMap;\nuse std::io::{self, Read, Write};\nuse std::time::{Duration, Instant};\n\nconst SERVER: Token = Token(0);\nconst TIMER: Token = Token(1);\n\nstruct Connection {\n    socket: TcpStream,\n    last_active: Instant,\n}\n\nfn main() -> io::Result<()> {\n    let mut poll = Poll::new()?;\n    let mut events = Events::with_capacity(1024);\n\n    // 设置TCP服务器\n    let addr = \"127.0.0.1:8000\".parse().unwrap();\n    let mut server = TcpListener::bind(addr)?;\n\n    poll.registry().register(\n        &mut server,\n        SERVER,\n        Interest::READABLE\n    )?;\n\n    let mut connections = HashMap::new();\n    let timeout = Duration::from_secs(60); // 60秒超时\n\n    loop {\n        poll.poll(&mut events, Some(Duration::from_secs(1)))?;\n\n        for event in events.iter() {\n            match event.token() {\n                SERVER => {\n                    let (mut socket, addr) = server.accept()?;\n                    let token = Token(connections.len() + 2);\n\n                    poll.registry().register(\n                        &mut socket,\n                        token,\n                        Interest::READABLE | Interest::WRITABLE\n                    )?;\n\n                    connections.insert(token, Connection {\n                        socket,\n                        last_active: Instant::now(),\n                    });\n                }\n                token => {\n                    if let Some(conn) = connections.get_mut(&token) {\n                        if event.is_readable() {\n                            let mut buffer = [0; 1024];\n                            match conn.socket.read(&mut buffer) {\n                                Ok(n) if n > 0 => {\n                                    conn.socket.write_all(&buffer[..n])?;\n                                    conn.last_active = Instant::now();\n                                }\n                                _ => {\n                                    connections.remove(&token);\n                                    continue;\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        }\n\n        // 清理超时连接\n        connections.retain(|_, conn| {\n            Instant::now().duration_since(conn.last_active) < timeout\n        });\n    }\n}"
+        }
+    ]
+}

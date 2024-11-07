@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/udp_server.rs",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1730968006253,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1730968006253,
+            "name": "Commit-0",
+            "content": "\nuse mio::net::UdpSocket;\nuse mio::{Events, Interest, Poll, Token};\nuse std::io;\n\nconst SERVER: Token = Token(0);\n\nfn main() -> io::Result<()> {\n    let mut poll = Poll::new()?;\n    let mut events = Events::with_capacity(1024);\n\n    let addr = \"127.0.0.1:8000\".parse().unwrap();\n    let mut socket = UdpSocket::bind(addr)?;\n\n    poll.registry().register(\n        &mut socket,\n        SERVER,\n        Interest::READABLE\n    )?;\n\n    let mut buffer = [0; 1024];\n\n    loop {\n        poll.poll(&mut events, None)?;\n\n        for event in events.iter() {\n            match event.token() {\n                SERVER => {\n                    let (len, addr) = socket.recv_from(&mut buffer)?;\n                    socket.send_to(&buffer[..len], addr)?;\n                }\n                _ => unreachable!(),\n            }\n        }\n    }\n}"
+        }
+    ]
+}

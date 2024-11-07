@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/timout_server.rs",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1730968118879,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1730968118879,
+            "name": "Commit-0",
+            "content": "use mio::*;\nuse std::time::{Duration, Instant};\n\nconst TIMER: Token = Token(0);\n\nstruct Timer {\n    deadline: Instant,\n}\n\nimpl Timer {\n    fn new(timeout: Duration) -> Timer {\n        Timer {\n            deadline: Instant::now() + timeout,\n        }\n    }\n\n    fn is_expired(&self) -> bool {\n        Instant::now() >= self.deadline\n    }\n}\n\nfn main() -> std::io::Result<()> {\n    let mut poll = Poll::new()?;\n    let mut events = Events::with_capacity(1024);\n\n    let timer = Timer::new(Duration::from_secs(5));\n\n    loop {\n        let timeout = if timer.is_expired() {\n            println!(\"Timer expired!\");\n            break;\n        } else {\n            Some(Duration::from_millis(100))\n        };\n\n        poll.poll(&mut events, timeout)?;\n    }\n\n    Ok(())\n}"
+        }
+    ]
+}

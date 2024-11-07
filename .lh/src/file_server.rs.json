@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/file_server.rs",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1730968208799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1730968208799,
+            "name": "Commit-0",
+            "content": "\nuse mio::{Events, Interest, Poll, Token};\nuse std::fs::File;\nuse std::io::{self, Read};\nuse std::os::unix::io::AsRawFd;\nuse mio::unix::SourceFd;\n\nconst FILE: Token = Token(0);\n\nfn main() -> io::Result<()> {\n    let mut poll = Poll::new()?;\n    let mut events = Events::with_capacity(1024);\n\n    // 打开文件\n    let mut file = File::open(\"test.txt\")?;\n    let fd = file.as_raw_fd();\n\n    // 将文件描述符包装为 SourceFd\n    let mut source = SourceFd(&fd);\n\n    // 注册到 poll\n    poll.registry().register(\n        &mut source,\n        FILE,\n        Interest::READABLE\n    )?;\n\n    let mut buffer = Vec::new();\n    let mut temp_buf = [0; 1024];\n\n    'outer: loop {\n        poll.poll(&mut events, None)?;\n\n        for event in events.iter() {\n            if event.token() == FILE {\n                loop {\n                    match file.read(&mut temp_buf) {\n                        Ok(0) => {\n                            // 文件读取完成\n                            break 'outer;\n                        }\n                        Ok(n) => {\n                            buffer.extend_from_slice(&temp_buf[..n]);\n                        }\n                        Err(ref e) if e.kind() == io::ErrorKind::WouldBlock => {\n                            // 需要等待更多数据\n                            break;\n                        }\n                        Err(e) => {\n                            return Err(e);\n                        }\n                    }\n                }\n            }\n        }\n    }\n\n    println!(\"Read {} bytes\", buffer.len());\n\n    // 将读取的内容转换为字符串（假设是UTF-8编码）\n    match String::from_utf8(buffer) {\n        Ok(content) => println!(\"Content: {}\", content),\n        Err(_) => println!(\"File contains non-UTF8 data\"),\n    }\n\n    Ok(())\n}"
+        }
+    ]
+}

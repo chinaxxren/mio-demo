@@ -1,0 +1,102 @@
+{
+    "sourceFile": "Cargo.toml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 21,
+            "patches": [
+                {
+                    "date": 1730966815782,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1730967008394,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,4 +4,6 @@\n edition = \"2021\"\n \n [dependencies]\n mio = \"1\"\n+\n+[[bin]]\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730967015746,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,5 +5,6 @@\n \n [dependencies]\n mio = \"1\"\n \n-[[bin]]\n\\ No newline at end of file\n+[[bin]]\n+name = \"tcp\"\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730967132659,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,11 @@\n [package]\n-name = \"mio\"\n+name = \"mio-demo\"\n version = \"0.1.0\"\n edition = \"2021\"\n \n [dependencies]\n mio = \"1\"\n \n [[bin]]\n\\ No newline at end of file\n-name = \"tcp\"\n+name = \"tcp_server\"\n+path = \"src/tcp_server.rs\"\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730967500122,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n version = \"0.1.0\"\n edition = \"2021\"\n \n [dependencies]\n-mio = \"1\"\n+mio = {version = \"*\"\"1\"\n \n [[bin]]\n name = \"tcp_server\"\n path = \"src/tcp_server.rs\"\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730967505976,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n version = \"0.1.0\"\n edition = \"2021\"\n \n [dependencies]\n-mio = {version = \"*\"\"1\"\n+mio = {version = \"*\", features = [\"os-poll\"]}\n \n [[bin]]\n name = \"tcp_server\"\n path = \"src/tcp_server.rs\"\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730967530304,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n version = \"0.1.0\"\n edition = \"2021\"\n \n [dependencies]\n-mio = {version = \"*\", features = [\"os-poll\"]}\n+mio = {version = \"*\", f}\n \n [[bin]]\n name = \"tcp_server\"\n path = \"src/tcp_server.rs\"\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730967539663,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n version = \"0.1.0\"\n edition = \"2021\"\n \n [dependencies]\n-mio = {version = \"*\", f}\n+mio = {version = \"*\", features = [full]}\n \n [[bin]]\n name = \"tcp_server\"\n path = \"src/tcp_server.rs\"\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730967550296,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n version = \"0.1.0\"\n edition = \"2021\"\n \n [dependencies]\n-mio = {version = \"*\", features = [full]}\n+mio = {version = \"*\", features = \"full\"}\n \n [[bin]]\n name = \"tcp_server\"\n path = \"src/tcp_server.rs\"\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730967602530,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n version = \"0.1.0\"\n edition = \"2021\"\n \n [dependencies]\n-mio = {version = \"*\", features = \"full\"}\n+mio = {version = \"*\",  = \"full\"}\n \n [[bin]]\n name = \"tcp_server\"\n path = \"src/tcp_server.rs\"\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730968025748,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,11 @@\n version = \"0.1.0\"\n edition = \"2021\"\n \n [dependencies]\n-mio = {version = \"*\",  = \"full\"}\n+mio = { version = \"1.0.2\", features = [\"net\", \"os-ext\", \"os-poll\"] }\n \n [[bin]]\n name = \"tcp_server\"\n\\ No newline at end of file\n-path = \"src/tcp_server.rs\"\n+path = \"src/tcp_server.rs\"\n+\n+[[b]]\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730968031984,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,5 +9,7 @@\n [[bin]]\n name = \"tcp_server\"\n path = \"src/tcp_server.rs\"\n \n-[[b]]\n\\ No newline at end of file\n+[[bin]]\n+name = \"udp_server\"\n+path = \"src/udp_server.rs\"\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730968125438,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,5 +11,7 @@\n path = \"src/tcp_server.rs\"\n \n [[bin]]\n name = \"udp_server\"\n-path = \"src/udp_server.rs\"\n\\ No newline at end of file\n+path = \"src/udp_server.rs\"\n+\n+[[]]\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730968131376,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,5 +13,6 @@\n [[bin]]\n name = \"udp_server\"\n path = \"src/udp_server.rs\"\n \n-[[]]\n\\ No newline at end of file\n+[[bin]]\n+name = \"tcp_client\"\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730968140765,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,5 +14,6 @@\n name = \"udp_server\"\n path = \"src/udp_server.rs\"\n \n [[bin]]\n-name = \"tcp_client\"\n\\ No newline at end of file\n+name = \"timeout_server\"\n+path = \"src/timeout_server.rs\"\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730968216968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,5 +15,7 @@\n path = \"src/udp_server.rs\"\n \n [[bin]]\n name = \"timeout_server\"\n-path = \"src/timeout_server.rs\"\n\\ No newline at end of file\n+path = \"src/timeout_server.rs\"\n+\n+[build-dependencies]\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730968223987,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,5 +17,6 @@\n [[bin]]\n name = \"timeout_server\"\n path = \"src/timeout_server.rs\"\n \n-[build-dependencies]\n\\ No newline at end of file\n+[[bin]]\n+name\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730968231203,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,5 +18,5 @@\n name = \"timeout_server\"\n path = \"src/timeout_server.rs\"\n \n [[bin]]\n-name\n\\ No newline at end of file\n+name = \"file_server\"\n"
+                },
+                {
+                    "date": 1730968409010,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,5 +18,6 @@\n name = \"timeout_server\"\n path = \"src/timeout_server.rs\"\n \n [[bin]]\n-name = \"file_server\"\n+name = \"async_file_server\"\n+path = \"src/file_server.rs\"\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730968708147,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,5 +19,11 @@\n path = \"src/timeout_server.rs\"\n \n [[bin]]\n name = \"async_file_server\"\n-path = \"src/file_server.rs\"\n\\ No newline at end of file\n+path = \"src/async_file_server.rs\"\n+\n+[[bin]]\n+name = \"custom_event_server\"\n+path = \"src/custom_event_server.rs\"\n+\n+[[bin]]\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730968714296,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,5 +25,6 @@\n [[bin]]\n name = \"custom_event_server\"\n path = \"src/custom_event_server.rs\"\n \n-[[bin]]\n\\ No newline at end of file\n+[[bin]]\n+name = \"all_\"\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730968722336,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,5 +26,6 @@\n name = \"custom_event_server\"\n path = \"src/custom_event_server.rs\"\n \n [[bin]]\n-name = \"all_\"\n\\ No newline at end of file\n+name = \"all_server\"\n+path\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1730966815782,
+            "name": "Commit-0",
+            "content": "[package]\nname = \"mio\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[dependencies]\nmio = \"1\"\n"
+        }
+    ]
+}
